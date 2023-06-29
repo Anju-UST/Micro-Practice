@@ -1,0 +1,26 @@
+<div class="menu-container">
+    <div class="search-container">
+      <input type="text" placeholder="Search" [(ngModel)]="searchTerm" (input)="filterMenuItems('all', searchTerm)" class="search-bar">
+    </div>
+    <div class="menu-details" id="menu">
+      <h2 class="menu-heading">Menu</h2>
+      <div class="menu-categories">
+        <button class="category-button" (click)="filterMenuItems('all', searchTerm)">All</button>
+        <button class="category-button" *ngFor="let category of categories" (click)="filterMenuItems(category, searchTerm)">{{ category }}</button>
+      
+      </div>
+      <div class="menu-items">
+        <div class="menu-item" *ngFor="let item of combinedMenuItems">
+          <img [src]="item.image" alt="{{ item.name }}" class="item-image">
+        <h3>{{ item.name }}</h3>
+        <p>{{ item.description }}</p>
+        <p class="item-price">{{ item.price | currency }}</p>
+        <div class="rating">
+          <span class="star" [class.filled]="index < item.rating" (click)="rateItem(item, index + 1)" *ngFor="let _ of [1, 2, 3, 4, 5]; let index">&#9733;</span>
+        </div>
+        <button (click)="ordernow(item)">Order Now</button>
+      </div>
+    </div> 
+   </div>
+  </div>
+
